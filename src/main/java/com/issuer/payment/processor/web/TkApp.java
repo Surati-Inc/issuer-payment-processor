@@ -52,7 +52,8 @@ public final class TkApp extends TkWrap {
 								new FkRegex("/transaction/route", new TkRouteTransactionToSurati(suratiUrl)),
 								new FkRegex("/transaction/routing/output", new TkOutputTransactionRouting()),
 								new FkRegex("/card/activate", new TkActivateCard()),
-								new FkRegex("/card/deactivate", new TkDeactivateCard())
+								new FkRegex("/card/deactivate", new TkDeactivateCard()),
+								new FkRegex("/api/transaction/route", new TkRouteTransactionToSuratiApi(suratiUrl))
 							)
 						)
 					)
