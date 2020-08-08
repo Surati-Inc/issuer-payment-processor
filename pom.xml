@@ -147,6 +147,7 @@
               <arguments>
                 <argument>--port=${port}</argument>
                 <argument>--surati-url=${surati.url}</argument>
+                <argument>--domain=${domain}</argument>
                 <argument>--hit-refresh</argument>
               </arguments>
             </configuration>

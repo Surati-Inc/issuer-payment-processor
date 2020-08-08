@@ -1,7 +1,9 @@
 package com.issuer.payment.processor.web;
 
 import org.takes.Take;
+import org.takes.facets.auth.TkSecure;
 import org.takes.facets.flash.TkFlash;
+import org.takes.facets.fork.FkMethods;
 import org.takes.facets.fork.FkRegex;
 import org.takes.facets.fork.TkFork;
 import org.takes.facets.forward.TkForward;
@@ -10,10 +12,12 @@ import org.takes.tk.TkSlf4j;
 import org.takes.tk.TkWithType;
 import org.takes.tk.TkWrap;
 
+import com.minlessika.secure.TkAnonymous;
+
 /**
  * App.
  * 
- * @author Olivier B. OURA (baudoliver7@gmail.com)
+ * @author Olivier B. OURA (baudolivier.oura@gmail.com)
  *
  */
 public final class TkApp extends TkWrap {
@@ -48,12 +52,40 @@ public final class TkApp extends TkWrap {
 								),
 								new FkRegex("/robots\\.txt", ""),
 								new FkRegex("/", new TkIndex()),
-								new FkRegex("/transaction/new", new TkNewTransaction()),
-								new FkRegex("/transaction/route", new TkRouteTransactionToSurati(suratiUrl)),
-								new FkRegex("/transaction/routing/output", new TkOutputTransactionRouting()),
-								new FkRegex("/card/activate", new TkActivateCard()),
-								new FkRegex("/card/deactivate", new TkDeactivateCard()),
-								new FkRegex("/api/transaction/route", new TkRouteTransactionToSuratiApi(suratiUrl))
+								new FkRegex(
+									"/login", 
+									new TkAnonymous(new TkLogin(suratiUrl))
+								),
+								new FkRegex(
+									"/transaction/new", 
+									new TkSecure(new TkNewTransaction())
+								),
+								new FkRegex(
+									"/transaction/route", 
+									new TkSecure(new TkRouteTransactionToSurati(suratiUrl))
+								),
+								new FkRegex(
+									"/transaction/routing/output", 
+									new TkSecure(new TkOutputTransactionRouting())
+								),
+								new FkRegex(
+									"/api/card/activate", 
+									new TkFork(
+										new FkMethods("POST", new TkActivateCard())
+									)						
+								),
+								new FkRegex(
+									"/api/card/deactivate", 
+									new TkFork(
+										new FkMethods("POST", new TkDeactivateCard()) 
+									)
+								),
+								new FkRegex(
+									"/api/transaction/route", 
+									new TkFork(
+										new FkMethods("POST", new TkRouteTransactionToSuratiApi(suratiUrl))
+									)									
+								)
 							)
 						)
 					)

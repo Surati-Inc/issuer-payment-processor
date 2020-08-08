@@ -36,17 +36,17 @@
 						<nav>
 							<ul>
 							   <li>
-								    <xsl:choose>
-								    	<xsl:when test="menu = 'index'">
-								    	    <xsl:text>Home</xsl:text>
-									    </xsl:when>
-									    <xsl:otherwise>
-									    	<a href="/">
-												<xsl:text>Home</xsl:text>
-											</a>
-									    </xsl:otherwise>
-								    </xsl:choose>									
+									<xsl:if test="identity">
+									    <xsl:text>@</xsl:text>
+					                    <xsl:value-of select="identity/login"/>															                   
+					                </xsl:if>
+					                <xsl:if test="not(identity)">
+					                    <a href="/login">
+											Login
+										</a>
+					                </xsl:if>									
 								</li>
+								<xsl:if test="identity">							   
 								<li>
 								    <xsl:choose>
 								    	<xsl:when test="menu = 'route-transaction'">
@@ -59,6 +59,12 @@
 									    </xsl:otherwise>
 								    </xsl:choose>									
 								</li>
+								<li>
+									<a href="{links/link[@rel='takes:logout']/@href}">
+										<xsl:text>Logout</xsl:text>
+									</a>
+								</li>
+								</xsl:if>
 							</ul>
 						</nav>
 					</header>
