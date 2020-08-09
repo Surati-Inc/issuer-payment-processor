@@ -85,6 +85,18 @@ public final class TkApp extends TkWrap {
 									new TkFork(
 										new FkMethods("POST", new TkRouteTransactionToSuratiApi(suratiUrl))
 									)									
+								),
+								new FkRegex(
+									"/card/new", 
+									new TkSecure(
+										new TkNewCardToEnroll()
+									)
+								),
+								new FkRegex(
+									"/card/enroll", 
+									new TkSecure(
+										new TkEnrollCard(suratiUrl)
+									)
 								)
 							)
 						)

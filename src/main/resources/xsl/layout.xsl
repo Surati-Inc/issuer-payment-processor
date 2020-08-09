@@ -46,7 +46,19 @@
 										</a>
 					                </xsl:if>									
 								</li>
-								<xsl:if test="identity">							   
+								<xsl:if test="identity">			
+								<li>
+								    <xsl:choose>
+								    	<xsl:when test="menu = 'cards-enrolled'">
+								    	    <xsl:text>Enroll a card</xsl:text>
+									    </xsl:when>
+									    <xsl:otherwise>
+									    	<a href="/card/new">
+												<xsl:text>Enroll a card</xsl:text>
+											</a>
+									    </xsl:otherwise>
+								    </xsl:choose>									
+								</li>				   
 								<li>
 								    <xsl:choose>
 								    	<xsl:when test="menu = 'route-transaction'">
