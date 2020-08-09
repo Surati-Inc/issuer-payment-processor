@@ -2,6 +2,8 @@ package com.issuer.payment.processor.web;
 
 import java.io.ByteArrayInputStream;
 import java.net.HttpURLConnection;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.logging.Level;
 
 import javax.json.JsonObject;
@@ -52,6 +54,24 @@ public final class TkRouteTransactionToSurati implements Take {
 				rrn = rqForm.single(key);
 			
 			body.append(String.format("%s=%s", key, rqForm.single(key))); 
+		}
+		
+		final LocalDateTime now = LocalDateTime.now();
+		
+		if(rqForm.single("7", "").equals("")) {
+			body.append(String.format("7=%s", now.format(DateTimeFormatter.ofPattern("MMddHHmmss"))));
+		}
+		
+		if(rqForm.single("12", "").equals("")) {
+			body.append(String.format("12=%s", now.format(DateTimeFormatter.ofPattern("HHmmss"))));
+		}
+		
+		if(rqForm.single("13", "").equals("")) {
+			body.append(String.format("13=%s", now.format(DateTimeFormatter.ofPattern("MMdd"))));
+		}
+		
+		if(rqForm.single("73", "").equals("")) {
+			body.append(String.format("73=%s", now.format(DateTimeFormatter.ofPattern("yyMMdd"))));
 		}
 		
 		try {

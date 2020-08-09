@@ -26,21 +26,21 @@
 	        </label>
 	        <input name="4" type="text" size="50" minlength="12" maxlength="12" required="" placeholder="Numeric - 12 digits" value="000001200000"/>
 	        <label>
-	          <a href="https://www.admfactory.com/iso8583-flows-data-elements-meaning-and-values/#field7" target="_blank">Field 7</a><xsl:text> - Transmission date and time (MMDDhhmmss)</xsl:text><span style="color: red"> *</span>
+	          <a href="https://www.admfactory.com/iso8583-flows-data-elements-meaning-and-values/#field7" target="_blank">Field 7</a><xsl:text> - Transmission date and time (MMDDhhmmss)</xsl:text>
 	        </label>
-	        <input name="7" type="text" size="50" minlength="10" maxlength="10" required="" placeholder="Numeric - 10 digits" value="0725155030"/>
+	        <input name="7" type="text" size="50" minlength="10" maxlength="10" placeholder="Numeric - 10 digits" />
 	        <label>
 	          <a href="https://www.admfactory.com/iso8583-flows-data-elements-meaning-and-values/#field11" target="_blank">Field 11</a><xsl:text> - System trace audit number (STAN)</xsl:text><span style="color: red"> *</span>
 	        </label>
 	        <input name="11" type="text" size="50" minlength="6" maxlength="6" required="" placeholder="Numeric - 6 digits" value="000001"/>
 	        <label>
-	          <a href="https://www.admfactory.com/iso8583-flows-data-elements-meaning-and-values/#field12" target="_blank">Field 12</a><xsl:text> - Time, local transaction (hhmmss)</xsl:text><span style="color: red"> *</span>
+	          <a href="https://www.admfactory.com/iso8583-flows-data-elements-meaning-and-values/#field12" target="_blank">Field 12</a><xsl:text> - Time, local transaction (hhmmss)</xsl:text>
 	        </label>
-	        <input name="12" type="text" size="50" minlength="6" maxlength="6" required="" placeholder="Numeric - 6 digits" value="155030"/>
+	        <input name="12" type="text" size="50" minlength="6" maxlength="6" placeholder="Numeric - 6 digits" />
 	        <label>
-	          <a href="https://www.admfactory.com/iso8583-flows-data-elements-meaning-and-values/#field13" target="_blank">Field 13</a><xsl:text> - Date, local transaction (MMDD)</xsl:text><span style="color: red"> *</span>
+	          <a href="https://www.admfactory.com/iso8583-flows-data-elements-meaning-and-values/#field13" target="_blank">Field 13</a><xsl:text> - Date, local transaction (MMDD)</xsl:text>
 	        </label>
-	        <input name="13" type="text" size="50" minlength="4" maxlength="4" required="" placeholder="Numeric - 4 digits" value="0725"/>
+	        <input name="13" type="text" size="50" minlength="4" maxlength="4" placeholder="Numeric - 4 digits" />
 	        <label>
 	          <a href="https://www.admfactory.com/iso8583-flows-data-elements-meaning-and-values/#field22" target="_blank">Field 22</a><xsl:text> - Point of service entry mode</xsl:text><span style="color: red"> *</span>
 	        </label>
@@ -66,9 +66,9 @@
 	        </label>
 	        <input name="49" type="text" size="50" minlength="3" maxlength="3" required="" placeholder="Alpha or numeric - 3 digits" value="XOF"/>
 	        <label>
-	          <xsl:text>Field 73 - Date, action (YYMMDD)</xsl:text><span style="color: red"> *</span>
+	          <xsl:text>Field 73 - Date, action (YYMMDD)</xsl:text>
 	        </label>
-	        <input name="73" type="text" size="50" minlength="6" maxlength="6" required="" placeholder="Numeric - 6 digits" value="200725"/>
+	        <input name="73" type="text" size="50" minlength="6" maxlength="6" placeholder="Numeric - 6 digits" />
 	        <label>
 	          <xsl:text>Field 104 - Transaction description</xsl:text><span style="color: red"> *</span>
 	        </label>
