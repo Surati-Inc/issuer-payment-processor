@@ -43,6 +43,9 @@ public final class TkRouteTransactionToSurati implements Take {
 		
 		final StringBuilder body = new StringBuilder("");
 		for (String key : fieldKeys) {
+			if(rqForm.single(key, "").equals(""))
+				continue;
+			
 			if(!body.toString().equals("")) {
 				body.append("&");
 			}
