@@ -24,6 +24,7 @@ import org.takes.rs.RsJson;
 import org.takes.rs.RsWithStatus;
 
 import com.jcabi.http.request.JdkRequest;
+import com.jcabi.http.response.JsonResponse;
 import com.jcabi.http.response.RestResponse;
 
 public final class TkRouteTransactionToSuratiApi implements Take {
@@ -125,8 +126,18 @@ public final class TkRouteTransactionToSuratiApi implements Take {
 				.header(HttpHeaders.ACCEPT, MediaType.APPLICATION_JSON)
 				.fetch(new ByteArrayInputStream(body.getBytes()))
 				.as(RestResponse.class)
-				.assertStatus(Matchers.isOneOf(HttpURLConnection.HTTP_OK, HttpURLConnection.HTTP_NOT_FOUND));
+				.assertStatus(Matchers.isOneOf(HttpURLConnection.HTTP_OK, HttpURLConnection.HTTP_NOT_FOUND, HttpURLConnection.HTTP_BAD_REQUEST));
 		
+		if(response.status() == HttpURLConnection.HTTP_BAD_REQUEST) {
+			
+			final JsonObject rsJson = response.as(JsonResponse.class)
+					  .json()
+					  .read()
+					  .asJsonObject();
+			
+			throw new IllegalArgumentException(rsJson.getString("message"));
+		}
+			
 		return response.status() == HttpURLConnection.HTTP_OK;
 	}
 	
