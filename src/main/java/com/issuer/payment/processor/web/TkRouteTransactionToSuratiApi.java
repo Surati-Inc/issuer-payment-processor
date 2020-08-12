@@ -38,48 +38,49 @@ public final class TkRouteTransactionToSuratiApi implements Take {
 	
 	@Override
 	public Response act(Request req) throws Exception {
-		
-		final RqFormSmart rqForm = new RqFormSmart(new RqGreedy(req));
-		
-		final String designation = rqForm.single("designation");
-		final Integer amount = Integer.parseInt(rqForm.single("amount"));
-		final String currencyCode = rqForm.single("currency_code");
-		final String pan = rqForm.single("pan");
-				
-		String rrn;
-		do {
-			rrn = newRRN();
-		} while(isRRNExists(pan, rrn));
 			
-		final LocalDateTime now = LocalDateTime.now();
-		
-		final Map<String, String> fields = new HashMap<>();
-		fields.put("2", pan);
-		fields.put("3", "506040");
-		fields.put("4", StringUtils.rightPad(StringUtils.leftPad(amount.toString(), 10, "0"), 12, "0"));
-		fields.put("7", now.format(DateTimeFormatter.ofPattern("MMddHHmmss")));
-		fields.put("11", "000001");
-		fields.put("12", now.format(DateTimeFormatter.ofPattern("HHmmss")));
-		fields.put("13", now.format(DateTimeFormatter.ofPattern("MMdd")));
-		fields.put("22", "010");
-		fields.put("37", rrn);
-		fields.put("41", "1@surati");
-		fields.put("42", "surati@market07");
-		fields.put("43", "01BP14895YAMOUSSOUKRO01YAKROMOROFE02RLCI");
-		fields.put("49", currencyCode);
-		fields.put("73", now.format(DateTimeFormatter.ofPattern("yyMMdd")));
-		fields.put("104", designation.substring(0, Math.min(100, designation.length()))); 
-		
-		final StringBuilder body = new StringBuilder("");
-		for (String key : fields.keySet()) {
-			if(!body.toString().equals("")) {
-				body.append("&");
+		try {
+			
+			final RqFormSmart rqForm = new RqFormSmart(new RqGreedy(req));
+			
+			final String designation = rqForm.single("designation");
+			final Integer amount = Integer.parseInt(rqForm.single("amount"));
+			final String currencyCode = rqForm.single("currency_code");
+			final String pan = rqForm.single("pan");
+					
+			String rrn;
+			do {
+				rrn = newRRN();
+			} while(isRRNExists(pan, rrn));
+				
+			final LocalDateTime now = LocalDateTime.now();
+			
+			final Map<String, String> fields = new HashMap<>();
+			fields.put("2", pan);
+			fields.put("3", "506040");
+			fields.put("4", StringUtils.rightPad(StringUtils.leftPad(amount.toString(), 10, "0"), 12, "0"));
+			fields.put("7", now.format(DateTimeFormatter.ofPattern("MMddHHmmss")));
+			fields.put("11", "000001");
+			fields.put("12", now.format(DateTimeFormatter.ofPattern("HHmmss")));
+			fields.put("13", now.format(DateTimeFormatter.ofPattern("MMdd")));
+			fields.put("22", "010");
+			fields.put("37", rrn);
+			fields.put("41", "1@surati");
+			fields.put("42", "surati@market07");
+			fields.put("43", "01BP14895YAMOUSSOUKRO01YAKROMOROFE02RLCI");
+			fields.put("49", currencyCode);
+			fields.put("73", now.format(DateTimeFormatter.ofPattern("yyMMdd")));
+			fields.put("104", designation.substring(0, Math.min(100, designation.length()))); 
+			
+			final StringBuilder body = new StringBuilder("");
+			for (String key : fields.keySet()) {
+				if(!body.toString().equals("")) {
+					body.append("&");
+				}
+				
+				body.append(String.format("%s=%s", key, fields.get(key))); 
 			}
 			
-			body.append(String.format("%s=%s", key, fields.get(key))); 
-		}
-		
-		try {
 			JsonObject json = TkRouteTransactionToSurati.routeTransaction(
 				rrn, 
 				pan, 
