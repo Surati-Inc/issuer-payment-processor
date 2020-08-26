@@ -150,7 +150,7 @@ public final class TkRouteTransactionToSuratiApi implements Take {
 			long low = 1;
 			long high = 100000000000L;
 			Long number = (long) (Math.random() * (high - low)) + low;
-			result = number.toString();
+			result = StringUtils.leftPad(number.toString(), 12, '0');
 		} while(result.length() != 12);
 		
 		return result;
