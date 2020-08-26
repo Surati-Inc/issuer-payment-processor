@@ -143,10 +143,17 @@ public final class TkRouteTransactionToSuratiApi implements Take {
 	}
 	
 	private String newRRN() {
-		long low = 1;
-		long high = 1000000000000L;
-		Long result = (long) (Math.random() * (high - low)) + low;
-		return result.toString();
+		
+		String result;
+		
+		do {
+			long low = 1;
+			long high = 100000000000L;
+			Long number = (long) (Math.random() * (high - low)) + low;
+			result = number.toString();
+		} while(result.length() != 12);
+		
+		return result;
 	}
 
 }
