@@ -57,7 +57,7 @@ public final class TkRouteTransactionToSuratiApi implements Take {
 			
 			final Map<String, String> fields = new HashMap<>();
 			fields.put("2", pan);
-			fields.put("3", "506040");
+			fields.put("3", "003040"); // achat en ligne
 			fields.put("4", StringUtils.rightPad(StringUtils.leftPad(amount.toString(), 10, "0"), 12, "0"));
 			fields.put("7", now.format(DateTimeFormatter.ofPattern("MMddHHmmss")));
 			fields.put("11", "000001");
